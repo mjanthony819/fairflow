@@ -193,8 +193,14 @@
       : prefDelta < 0
         ? `and it even gains ${-prefDelta} preferred-slot assignment${-prefDelta === 1 ? '' : 's'}`
         : 'at no cost in preferred-slot assignments';
+    const gA = pref.metrics.gini.toFixed(2), gB = fair.metrics.gini.toFixed(2);
+    const giniText = fair.metrics.gini < pref.metrics.gini
+      ? `Gini falls from ${gA} to ${gB}, a visibly more even spread`
+      : fair.metrics.gini > pref.metrics.gini
+        ? `Gini rises from ${gA} to ${gB} on this data - the fairness cost encourages spreading but does not guarantee a more even spread in every instance`
+        : `Gini unchanged at ${gA}`;
     $('#compare').innerHTML = `<table class="compare-table" data-testid="compare-table">${head}${body}</table>
-      <p class="compare-note" data-testid="compare-note">Both runs fill ${fair.metrics.filled} of ${fair.metrics.totalSeats} seats — the fairness weight never sacrifices coverage. ${moved.length} assignment${moved.length === 1 ? '' : 's'} moved between the two plans. Gini falls from ${pref.metrics.gini.toFixed(2)} to ${fair.metrics.gini.toFixed(2)}${fair.metrics.gini < pref.metrics.gini ? `, a visibly more even spread, ${priceText}` : `; ${priceText}`}.</p>`;
+      <p class="compare-note" data-testid="compare-note">Both runs fill ${fair.metrics.filled} of ${fair.metrics.totalSeats} seats — the fairness weight never sacrifices coverage. ${moved.length} assignment${moved.length === 1 ? '' : 's'} moved between the two plans. ${giniText}; ${priceText}.</p>`;
   }
 
   /* ---------- flow diagram ---------- */
