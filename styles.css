@@ -225,6 +225,9 @@ main { padding: 24px 28px 40px; max-width: 1280px; margin: 0 auto; }
 .add-row input[type="number"] { flex: 0 0 70px; }
 
 .matrix-wrap { overflow-x: auto; }
+.edit-grid > div, .board-grid > * { min-width: 0; }
+.edit-grid > div { overflow-x: auto; }
+#diagnostics { overflow-x: auto; }
 .matrix { border-collapse: collapse; }
 .matrix th, .matrix td { border: 1px solid var(--line); padding: 0; }
 .matrix th { background: var(--paper-2); font-size: 11px; padding: 6px 8px; max-width: 110px; }
